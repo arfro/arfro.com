@@ -1,7 +1,6 @@
-.iml
+.idea
 _site
+Gemfile.lock
 .sass-cache
 .jekyll-metadata
-Gemfile
-Gemfile.lock
-.idea
+.DS_Store
