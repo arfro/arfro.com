@@ -7,8 +7,8 @@ fig-caption: # Add figcaption (optional)
 tags: [functional-programming, category-theory, oo-programming]
 ---
 
-Sooner or later every programmer comes across functional programming paradigm. Some of us get to work with it and some of us only hear about it, some of us maybe even try it out and can't help but wonder - why is it so hype now? I was wondering this myself when I started. Functional programming at first can make little sense - in fact in a way it can even make you feel like it goes against what you've learnt before. <br><br>
-In this post I will try to pinpoint a few basics that will allow to understand what functional programming is, what it bases on and why is it all over the news these days.
+Sooner or later every programmer comes across functional programming paradigm. Some of us get to work with it and some of us only hear about it, some of us maybe even try it out and can't help but wonder - why is it so hype now? I was wondering this myself when I started. Functional programming at first can make little sense - in fact in a way it can even make you feel like it goes against what you've learnt before. If you're anything like I was upon starting learning about it you could perhaps share a common enough misconception that you need to know maths very well first or that knowing functional programming is a silver bullet or even "the ultimate solution".<br><br>
+In this post I will try to pinpoint a few basics that will allow to understand what functional programming really is, what it is not, what it bases on, why people mention maths in its context so much and why is it all over the news these days.
 
 In this post I want to cover the following:
 - what's category theory - absolute basics
@@ -20,15 +20,19 @@ In this post I want to cover the following:
     - dont need to know category rheory to write funtinoal code, once youre good with functinoal category theory will start
     making more sense on its own
 - what's functional programming
-    - think of code like algebra, you wouldn't expect side effects from 1 + 1
+    - closer to maths but you dont need to maths guru. think of code like algebra, you wouldn't expect side effects from 1 + 1
     - don't mutate any state (like in algebra x = 1 and y = 5 you know x + y is always 6. If you mutate then its not
      deterministic
      - obviously not a rule but whats easy in OO (for loops instad of recursion) is a bit more difficult in fp and whats easy in fp (e.g. composing? deterministic values?) is not tht east in oo
     and will cause problems)
     - separate data from functions (like in category theory nodes and functors)
     - compose your functions
+    - itd not only scala, you can write in cpp as well (B. Milewski in Category Theory for programmers)
 - why is functional programmiong on hype now
-    - multicore processors
+    - even java has some lambdas
+    - imperative programming is about side effects, side effect != pure functions
+    - possible to compose concurrency (everything is deterministic if pure)
+    - multicore processors these days, tough to parralelie non deterministic code
     - parallism works well with immutability and associativity
 
 add pic:
