@@ -16,7 +16,8 @@ In this post I will try to pinpoint a few basics that will allow you to understa
 A very short answer to this question is: <b>no</b>. <br><br>
 A slightly longer answer to this question is: it's a little bit closer to maths than imperative languages but it doesn't mean you need to know maths inside out to write functional code. Will knowing certain branches of maths help? Yes. Is it crucial? No. <br>Think about a builder. Is it required of them to learn about the fundamentals of architecture and civil engineering? No. Would it benefit their understanding of why certain tasks have to be done a certain way even though it seems like an overkill? Very likely yes. <br><br>
 A long answer to this question is: functional programming bases on a branch of maths called _category theory_. In a <b>MASSIVE</b> oversimplification category theory is a branch of mathematics that reasons about categories and relationships between them instead of focusing on elements of categories, e.g. category theory would reason about negative numbers as an abstract idea rather than focusing on literal values like -2 or -23. Kinda like a bird's eye view where you don't see the details but patterns. <br><br>
-I am not gonna dive any deeper as this could easily be a topic for a separate blog altogether - but let's agree the main take away from category theory should be <b>composability</b> - if we know that `add` is a function called on a negative number that results in a negative number and `abs` (absolute value) is a function called on a negative number that results in a positive number we can imagine that calling `add` first which results in a negative number can be composed with `abs` like:
+I am not gonna dive any deeper as this could easily be a topic for a separate blog altogether - but let's agree the main take away from category theory should be <b>composability</b> - a way of assembling a number of smaller functions into a larger function.
+ If we know that `add` is a function called on a negative number that results in a negative number and `abs` (absolute value) is a function called on a negative number that results in a positive number we can imagine that calling `add` first which results in a negative number can be composed with `abs` like:
 
 ![function composition]({{site.baseurl}}/assets/img/functional-programming/category-theory-small.png)
 
@@ -27,6 +28,8 @@ where:<br>
 `f` is `add`<br>
 `g` is `abs`<br>
 `g o f` (g after f) is a composition
+
+... we can then have a larger function called ``addAndGetAbsolute`` which will be equivalent of calling ``g o f``
 
 ### How is functional programming different to what I know?
 

@@ -7,7 +7,7 @@ url: "arfro.github.com" # the base hostname & protocol for your site, e.g. http:
 # Author Settings
 author: annette # add your name
 author-img: annette.jpg # add your photo
-about-author: Scala engineer on a run - taking time in descovering the nitty gritty details of functional programming.
+about-author: Scala engineer on a run - taking time in descovering the nitty gritty details of functional programming and, most of all, Scala.
 social-github: arfro # add your Github handle
 social-linkedin: annetteres # add your Linkedin handle
 social-email: aerfromenes@gmail.com # add your Email address
