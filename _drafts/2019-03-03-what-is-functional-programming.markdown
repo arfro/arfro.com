@@ -7,7 +7,7 @@ fig-caption: # Add figcaption (optional)
 tags: [functional-programming, category-theory, oo-programming]
 ---
 
-Sooner or later every programmer comes across functional programming paradigm. Some of us get to work with it and some of us only hear about it, some of us maybe even try it out and can't help but wonder - why is it so hype now? I was wondering this myself when I started. Functional programming at first can make little sense - in fact in a way it can even make you feel like it goes against what you've learnt before. If you're anything like I was upon starting learning about it you could perhaps share a common enough misconception that you need to know maths very well first or that knowing functional programming is a silver bullet or even "the ultimate solution".<br><br>
+Sooner or later every programmer comes across functional programming paradigm. Some of us get to work with it and some of us only hear about it, some of us maybe even try it out and can't help but wonder - why is it so hype now? I was wondering this myself when I started. Functional programming at first can make little sense - in fact in a way it can even make you feel like it goes against what you've learnt before. If you're anything like I was upon starting learning about it you could perhaps share a common enough misconception that you need to know maths very well first or that functional paradigm is a silver bullet to any programming problem.<br><br>
 In this post I will try to pinpoint a few basics that will allow you to understand what functional programming really is, what it is not, what it bases on, why people mention maths in its context so much, why you probably heard it's difficult and why is it all over the news these days. Bear with me and I will try to cover all of those questions. 
 
 
@@ -105,9 +105,9 @@ case class A // only data
 case class B // only data
 case class C // only data
 
-def f: A => B = ??? // only function, not a method of A nor B
-def g: B => C = ??? // only function, not a method of B nor C
-def gof: A => C = ??? // only function, not a method of A nor C
+def f: A => B = ??? // only function
+def g: B => C = ??? // only function
+def gof: A => C = ??? // only function
 {% endhighlight %}
 
 
@@ -120,7 +120,7 @@ It depends how deep you want to dig. It derives from category theory but you don
 ##### Misconception 2: Functional programming is a silver bullet.
 There is no silver bullet in programming. Functional programming just as any other paradigm is just a tool in your toolbox - it won't be a best choice for all tasks. Sure you can hit a nail with a crowbar but other tools might simply be more suitable.  
 ##### Misconception 2: Functional programming is difficult.
-It's a different way of thinking which makes it appear more complex. It's obviously not a rule but I personally find that sometimes things that are considered very easy the imperative ways tend to seem a bit more complicated or cumbersome in functional programming. It's all a matter of practice and with time you get to "rewire" your ways of thinking. But even once you have your brain rewired I can guarantee that the learning will never cease, be it functional or imperative paradigm!
+It's a different way of thinking which makes it appear more complex. It's obviously not a rule but I personally find that sometimes things that are considered very easy the imperative ways tend to seem a bit more complicated or cumbersome in functional programming. It's all a matter of practice and with time you get to "rewire" your ways of thinking. But even once you have your brain rewired I can guarantee that the learning will never cease, be it functional or any other paradigm!
 
 ----
 
