@@ -6,7 +6,7 @@ img: recursion/recursion.jpeg
 tags: [functional-programming, recursion]
 ---
 
- We can imagine that any non-trivial program will at some stage have to loop over something and since we spoke of immutability in functional programming so much we might feel a bit hesitant to use our regular loops... Recursion comes to rescue.
+ We can imagine that any non-trivial program will at some stage have to loop over something and since we spoke of immutability in functional programming so much we might feel a bit hesitant to use our regular loops... Recursion comes to rescue, right?
 
 
 ### What's recursion, how does it actually work and how does it relate to immutability?
@@ -91,30 +91,34 @@ The calls will look like this...
 #### What.. So does recursion then help with sticking to immutability or not?
   As each <b>head recursive</b> call is pushed onto a stack and then evaluated on function exit there is actually no mutation of variables, only function calls. It can cause stack overflow though, e.g. if we are getting a factorial of a large number so generally it is a better idea to write <b>tail recursive</b> functions. As I mentioned before in Scala they are actually automatically optimised to become while loops under the hood so technically tail recursion is not really a fully immutable solution. 
   <br><br>
-  So it comes down really to what would be your personal choice - recursion or a loop. I have quite a bit of confidence in Scala's inner workings on optimization and so I go for tail recursive solutions. Apart from the Scala confidence part I find them more entertaining, generally more consistent with the rest of the codebase, looking more concise and I also don't have to worry about little bugs I could introduce in getting my own loops to work (like off-by-1 or so). 
+  So it comes down really to what would be your personal choice - recursion or a loop. I have quite a bit of confidence in Scala's inner workings on optimization and so I go for tail recursive solutions. Apart from the Scala confidence part I find them more entertaining, generally more consistent with the rest of the codebase, looking more concise and I also don't have to worry about bugs I could introduce while getting my own loops to work (like off-by-1 or so). 
 
 ### Real life
-I can sure write a factorial function or list some directories, but where could I possibly use recursion in real life?<Br>
+You can sure write a little factorial function or list some directories, but where could you possibly use recursion in real life and in real code?<br><br>
+This question bogged me quite a lot when starting my functional programming journey. I am a very hands-on engineer so I was skeptical when seeing Scala books talk of map, flatmap, fold and so on yet no mention on those recursive functions I was told I had to master. I just couldn't see how to apply recursion in real programming, real problems.<br><br>
+It turns out there is two things nobody told me:
+* most of the times you actually use transformation methods like map, flatMap, foldLeft, foldRight, reduce, filter etc. instead of braining out recursion - check out this one liner implementation of our factorial function using `foldLeft` (which btw is implemented as tail recursion under the hood):<br>
+{% highlight scala %}
+def factorial(i: Int) = (1 to i).toList.foldLeft(1)(_ * _)
+{% endhighlight %}
+* realistically, you will need recursion for very custom problems - at work I actually had to write a number of recursive functions for nested Json containing a recursive data structure - there wasn't a ready out-of-the-box solution like `foldLeft` on a list above. 
 
-Recursive data structures - data structure that has references to itself. have to be iterated over recursively. E.g. Any tree like structure, maybe employees that have a list of subordinates that have a list of subordinates that have no subordinates <br>
-
-I would like to stress the importance of writing tests for recursive functions, no matter how bulletproof they seem to be. With great power comes great responsibility and nothing makes you sleep at nice as soundly as a well tested recursive code in production.
+I would like to stress the importance of writing tests for your recursive functions once you implement one - no matter how bulletproof the solution seems. I always test the happy path, the mean path but also the "this will never happen" path. With great power comes great responsibility and nothing makes you sleep at night as soundly as a well tested (especially recursive) code in production.
 
 ### Summary 
-I would like to stress two rules of thumb for writing recursive call here:
+To summarize I would like to stress two rules of thumb for writing recursive functions:
 * write your exit condition before writing anything else (here: `if n <= 1`)
-* make sure you are moving towards the exit condition in your recursive calls (here: `factorial(n - 1)` - moving towards `1`)
+* make sure you are moving towards the exit condition in your recursive calls (here: passing `n - 1` to a recursive call - with each step moving closer towards`1`)
 
-But remember - as one wise woman once said: 
+But remember - as a wise woman once said: 
 >Where there is people practising recursion there stacks shall overflow and functions shall never exit.
 
-I've been there and a lot of programmers have too. It's difficult to get recursion right at first. But I promise if you commit to solving 30 problems recursively you will start seeing a new ways of thinking emerging.
+I've been there and a lot of programmers have too. It's difficult to get recursion right at first. But I promise if you commit to solving 30 problems recursively you will start seeing a new way of thinking emerging.
 
-Recursion is a very helpful tool to have in your functional programming journey. You will likely not use it daily, but in my career I did have to write quite a number of recursive functions so I can't stress enough how important it is to get familiar with it. I promise that with time it will become more and more clear!
+Recursion is a very helpful tool to have in your functional programming journey. Depending on what you're working on you will likely not use it daily... probably not even monthly. But every now and then you will arrive at a custom problem that will beg to be solved recursively - and that's when all your practice will pay off. <br>
 
 ----
 
 References:<br>
-_Category theory for programmers_ by B. Milewski<br>
-_Basic Category Theory_ by T. Leinster<br>
+_Functional programming in Scala: Simplified_ by A. Alexander<br>
 _Scala Cookbook_ by A. Alexander
