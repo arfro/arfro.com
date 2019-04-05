@@ -119,7 +119,7 @@ With all the above information let's try and fight a few misconceptions that I m
 It depends how deep you want to dig. It derives from category theory but you don't need to be a maths guru at all to learn functional programming. As long as you know your algebrae :)
 ##### Misconception 2: Functional programming is a silver bullet.
 There is no silver bullet in programming. Functional programming just as any other paradigm is just a tool in your toolbox - it won't be a best choice for all tasks. Sure you can hit a nail with a crowbar but other tools might simply be more suitable.  
-##### Misconception 2: Functional programming is difficult.
+##### Misconception 3: Functional programming is difficult.
 It's a different way of thinking which makes it appear more complex. It's obviously not a rule but I personally find that sometimes things that are considered very easy the imperative ways tend to seem a bit more complicated or cumbersome in functional programming. It's all a matter of practice and with time you get to "rewire" your ways of thinking. But even once you have your brain rewired I can guarantee that the learning will never cease, be it functional or any other paradigm!
 
 ----
