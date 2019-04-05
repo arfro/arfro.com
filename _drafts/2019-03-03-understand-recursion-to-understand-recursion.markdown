@@ -91,7 +91,7 @@ The calls will look like this...
 #### What.. So does recursion then help with sticking to immutability or not?
   As each <b>head recursive</b> call is pushed onto a stack and then evaluated on function exit there is actually no mutation of variables, only function calls. It can cause stack overflow though, e.g. if we are getting a factorial of a large number so generally it is a better idea to write <b>tail recursive</b> functions. As I mentioned before in Scala they are actually automatically optimised to become while loops under the hood so technically tail recursion is not really a fully immutable solution. 
   <br><br>
-  So it comes down really to what would be your personal choice - tail recursion or a loop. Myself I go for tail recursive solutions anyway as I find them more entertaining, generally more consistent with the rest of the codebase, looking more concise and most of all I don't have to worry about little mistakes you can make when working with loops e.g. off-by-1 mistakes. I am also happy to cushion myself with being confident in Scala's inner workings on the optimization.
+  So it comes down really to what would be your personal choice - recursion or a loop. I have quite a bit of confidence in Scala's inner workings on optimization and so I go for tail recursive solutions. Apart from the Scala confidence part I find them more entertaining, generally more consistent with the rest of the codebase, looking more concise and I also don't have to worry about little bugs I could introduce in getting my own loops to work (like off-by-1 or so). 
 
 ### Real life
 I can sure write a factorial function or list some directories, but where could I possibly use recursion in real life?<Br>
