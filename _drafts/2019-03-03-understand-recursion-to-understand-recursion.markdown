@@ -11,7 +11,7 @@ tags: [functional-programming, recursion]
 
 ### What's recursion, how does it actually work and how does it relate to immutability?
 
-Recursion is a function that calls itself until an exit condition is met. It is a way to break down a large problem into smaller problems which when all solved will also solve the large problem. To put that into a real life perspective: my friends would know that my hair used to be quite long and so drying it was a form of a recursive call. Dry my hair for a minute. Check if my hair is dry. If it's dry, stop. Else, dry my hair for one minute.<br>
+Recursion is a function that calls itself until an exit condition is met. It is a way to break down a large problem into smaller problems which when all solved will also solve the large problem. To put that into a real life perspective: drying my hair could be a form of a recursion. Dry my hair for a minute. Check if my hair is dry. If it's dry, stop. Else, dry my hair for one minute.<br>
 
 #### How recursion works on stack
 
