@@ -63,7 +63,7 @@ Head recursion is a recursion that calls itself with an updated argument until t
 
 
 ### Tail recursion
-Tail recursion is a way to avoid stack overflow exceptions. Tail recursive function is a function where the very last call is the call to itself. There is an accumulator that allows to pass a calculated value to the next recursive call as we go. In Scala they can be annotated with `@tailrec`. 
+Tail recursion (if done right) is a way to avoid stack overflow exceptions. Tail recursive function is a function where the very last call is the call to itself. There is an accumulator that allows to pass a calculated value to the next recursive call as we go. In Scala they can be annotated with `@tailrec`. 
 <br>
 <br>
 So let's rewrite our factorial:
@@ -89,7 +89,7 @@ The calls will look like this...
 <b>PLOT TWIST!</b> In Scala tail recursive functions are actually optimised to be while loops under the hood.
 
 #### What.. So does recursion then help with sticking to immutability or not?
-  As each <b>head recursive</b> call is pushed onto a stack and then evaluated on function exit there is actually no mutation of variables, only function calls. It can cause stack overflow though, e.g. if we are getting a factorial of a large number so generally it is a better idea to write <b>tail recursive</b> functions. As I mentioned before in Scala they are actually automatically optimised to become while loops under the hood so technically tail recursion is not really a fully immutable solution. 
+  As each <b>head recursive</b> call is pushed onto a stack and then evaluated on function exit there is actually no mutation of variables, only function calls. It can cause stack overflow though, e.g. if we are getting a factorial of a large number so generally it is a better idea to write <b>tail recursive</b> functions. As I mentioned before in Scala they are actually automatically optimised to become while loops under the hood so \*technically\* tail recursion is not really a fully immutable solution. 
   <br><br>
   So it comes down really to what would be your personal choice - recursion or a loop. I have quite a bit of confidence in Scala's inner workings on optimization and so I go for tail recursive solutions. Apart from the Scala confidence part I find them more entertaining, generally more consistent with the rest of the codebase, looking more concise and I also don't have to worry about bugs I could introduce while getting my own loops to work (like off-by-1 or so). 
 
@@ -100,6 +100,10 @@ It turns out there is two things nobody told me:
 * most of the times you actually use transformation methods like map, flatMap, foldLeft, foldRight, reduce, filter etc. instead of braining out recursion - check out this one liner implementation of our factorial function using `foldLeft` (which btw is implemented as tail recursion under the hood):<br>
 {% highlight scala %}
 def factorial(i: Int) = (1 to i).toList.foldLeft(1)(_ * _)
+{% endhighlight %}
+...or `reduce`:
+{% highlight scala %}
+def factorial(i: Int) = (1 to i).toList.reduce(_ * _)
 {% endhighlight %}
 * realistically, you will need recursion for very custom problems - at work I actually had to write a number of recursive functions for nested Json containing a recursive data structure - there wasn't a ready out-of-the-box solution like `foldLeft` on a list above. 
 
