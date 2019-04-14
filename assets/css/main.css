@@ -445,8 +445,11 @@ template {
 
 .highlighter-rouge {
   color: white;
-  background: grey;
+  background: black;
   padding: 0.1rem 0.3rem;
+  border-radius: 2px;
+  font-size: small;
+  margin-left: 3px;
 }
 
 .highlight .hll {

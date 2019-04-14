@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Understand recursion to understand recursion
-date: 2019-03-04 13:32:20
+date: 2019-05-13 13:32:20
 img: recursion/recursion.jpeg 
 tags: [functional-programming, recursion]
 ---
@@ -97,7 +97,7 @@ The calls will look like this...
 You can sure write a little factorial function or list some directories, but where could you possibly use recursion in real life and in real code?<br><br>
 This question bogged me quite a lot when starting my functional programming journey. I am a very hands-on engineer so I was skeptical when seeing Scala books talk of map, flatmap, fold and so on yet no mention on those recursive functions I was told I had to master. I just couldn't see how to apply recursion in real programming, real problems.<br><br>
 It turns out there is two things nobody told me:
-* most of the times you actually use transformation methods like map, flatMap, foldLeft, foldRight, reduce, filter etc. instead of braining out recursion - check out this one liner implementation of our factorial function using `foldLeft` (which btw is implemented as tail recursion under the hood):<br>
+* most of the times you actually use transformation/aggregation methods like map, flatMap, foldLeft, foldRight, reduce, filter etc. instead of braining out recursion - check out this one liner implementation of our factorial function using `foldLeft` (which btw is implemented as tail recursion under the hood):<br>
 {% highlight scala %}
 def factorial(i: Int) = (1 to i).toList.foldLeft(1)(_ * _)
 {% endhighlight %}
