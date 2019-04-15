@@ -1,4 +1,4 @@
-title: arfro
+title: arfro - Scala and functional programming blog
 description: > # this means to ignore newlines until "baseurl:"
   Scala & functional programming on a run.
 permalink: ':title/'
