@@ -27,11 +27,6 @@
     <meta content="{{ page.date | date_to_xmlschema }}" property="article:published_time">
     <meta content="{{ site.url }}/about/" property="article:author">
   {% endif %}
-  {% if page.img %}
-    <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ page.img }}" property="og:image">
-  {% else %}
-    <meta content="{{ site.url }}{{ site.baseurl }}/assets/img/{{ site.author-img }}" property="og:image">
-  {% endif %}
   {% if page.categories %}
     {% for category in page.categories limit:1 %}
     <meta content="{{ category }}" property="article:section">
@@ -46,7 +41,7 @@
 	<meta name="description" content="{{ page.description }}">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta property="og:image" content="">
+    <meta content=https://arfro.github.io/assets/img/recursion/recursion.jpg" property="og:image">
 	<link rel="shortcut icon" href="{{ "/assets/img/favicon/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
 	<link rel="apple-touch-icon" href="{{ "/assets/img/favicon/favicon.ico" | prepend: site.baseurl }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ "/assets/img/favicon/favicon.ico" | prepend: site.baseurl }}">
