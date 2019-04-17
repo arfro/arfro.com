@@ -1,6 +1,6 @@
 ---
 layout: post
-title: What is functional programming?
+title: What's functional programming?
 date: 2019-04-17 18:45:20
 img: functional-programming/category-theory-2.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
