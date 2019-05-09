@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Understand recursion to understand recursion
-date: 2019-05-13 13:32:20
+date: 2019-05-01 13:32:20
 img: recursion/recursion.jpeg 
 tags: [functional-programming, recursion]
 ---

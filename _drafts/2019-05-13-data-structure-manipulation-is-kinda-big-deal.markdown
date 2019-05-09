@@ -5,7 +5,7 @@ date: 2019-03-05 13:32:20
 img: transformations/factory.png 
 tags: [transformation, map, flatMap, functional-programming]
 ---
-Data manipulation and transformation is a kind of a big deal. Now that I shared that recursion is important but also mentioned there is other ways to achieve certain goals let's look into that. This will be a first post in a mini series on data manipulation and transformation. I will focus on <b>collections</b> mainly - there is other important usages of those functions which I will pinpoint as well but focus on most intuitive stuff first.
+Data manipulation and transformation is a kind of a big deal. Now that I shared that recursion is important but also mentioned there is other ways to achieve certain goals let's look into that. This will be a first post in a mini series on data manipulation and transformation. I will focus on <b>collections</b> mainly - there is other important usages but I will focus on most intuitive stuff first.
 <br>
 
 Keeping that in mind let's recall Scala collections real quick:
@@ -15,12 +15,17 @@ Keeping that in mind let's recall Scala collections real quick:
 * tuple
 * Option (a collection that's either empty or has one item, fabulous into from Alvin Alexander [here](https://alvinalexander.com/scala/using-scala-option-some-none-idiom-function-java-null))
 
-When I think Scala I like to think of designing a blueprint of a factory line. Let's imagine you have a factory that fixes bikes. What could be our work flow? Maybe something like: 
+When I think Scala I like to think of designing a blueprint of a factory line.
+ 
+ 
+
+
+ Let's imagine you have a factory that fixes bikes. What could be our work flow? Maybe something like: 
 * inspect the bike (get list of problems)
 * fix all problems (if any)
 * clean bike
 
-We want to make sure that when the bike arrives, it passes through all of those stages. The bike gets transformed in a way - if it's broken it gets fixed and cleaned, if it's not broken, it get's cleaned.
+We want to make sure that when the bike arrives, it passes through all of those stages. The bike gets transformed in a way - if it's broken it gets fixed and cleaned, but if it's not broken, it only gets cleaned.
 <br>
 
 With this image in mind, let's start with `map` and `flatMap`.<br>
