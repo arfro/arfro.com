@@ -3,12 +3,9 @@ layout: post
 title: Data transformation is kind of a big deal - part 1
 date: 2019-03-05 13:32:20
 img: transformations/factory.png 
-tags: [aggregation, transformation, filtering, functional-programming, map, fold, reduce, flatMap]
+tags: [transformation, map, flatMap, functional-programming]
 ---
-Data structure manipulation is a kind of a big deal. Now that I shared that recursion is important but there is other ways to achieve your goal let's look into `map`, `flatMap`, `filter`, `reduce` and `fold`. This post will focus on <b>collections</b> only - there is other important usages of those functions but let's focus on simple stuff first.
-<br>
-
-When I think Scala I like to think of designing a blueprint of a factory line. You can think of each of the above mentioned transformation functions as one station in a factory line. This sounds complicated but I promise the only thing it is is literally - do A, then B, then C.
+Data manipulation and transformation is a kind of a big deal. Now that I shared that recursion is important but also mentioned there is other ways to achieve certain goals let's look into that. This will be a first post in a mini series on data manipulation and transformation. I will focus on <b>collections</b> mainly - there is other important usages of those functions which I will pinpoint as well but focus on most intuitive stuff first.
 <br>
 
 Keeping that in mind let's recall Scala collections real quick:
@@ -16,10 +13,20 @@ Keeping that in mind let's recall Scala collections real quick:
 * Map
 * Set
 * tuple
-* Option (a collection that's either empty or has one item)
+* Option (a collection that's either empty or has one item, fabulous into from Alvin Alexander [here](https://alvinalexander.com/scala/using-scala-option-some-none-idiom-function-java-null))
+
+When I think Scala I like to think of designing a blueprint of a factory line. Let's imagine you have a factory that fixes bikes. What could be our work flow? Maybe something like: 
+* inspect the bike (get list of problems)
+* fix all problems (if any)
+* clean bike
+
+We want to make sure that when the bike arrives, it passes through all of those stages. The bike gets transformed in a way - if it's broken it gets fixed and cleaned, if it's not broken, it get's cleaned.
+<br>
+
+With this image in mind, let's start with `map` and `flatMap`.<br>
 
 ### map
-You can call `map` on all the collections. It applies a passed function to each element and returns a collection of new elements. <br>
+You can call `map` on all the collections. It applies a passed function to each element and returns a collection of new elements. (kinda like a stage in a factory)<br>
 
 {% highlight scala %}
 def divideByTwo(number: Int) = number / 2
@@ -31,13 +38,13 @@ List(10, 20, 30).map(divideByTwo) // List(5, 10, 15)
 List(10, 20, 30).map(nr => nr / 2) // List(5, 10, 15)
 {% endhighlight %}
 
-Of course the function used in `map` can be a function that goes from (in our case) `Int` to any other type - imagination is your limit. So let's maybe try a function that goes from `Int` to `String`?
+Of course the function used in `map` can be a function that goes from (in our case) `Int` to any other type - sky is your limit. So let's maybe try a function that goes from `Int` to `String`?
 {% highlight scala %}
 List(10, 20, 30).map(nr => nr.toString) // List("5", "10", "15") 
 {% endhighlight %}
 
 <b>Summary</b><br>
-You can think of `map` as "apply this function to each element of this collection"
+You can think of `map` as "iterate over this collection and apply this function to each element". Does it not resemble a for loop does?
 
 ### flatMap
 
@@ -45,19 +52,13 @@ You can think of `map` as "apply this function to each element of this collectio
 
 * map
 * flatMap 
-* filter
-* fold:
-    - foldLeft
-    - foldRight
-* reduce:
-    - reduceLeft
-    - reduceRight
-* collect
-* forEach
 
-How to think im map etc instead of loops?
 
-Realistically how often do you use those?
+### Realistically, how often do you use those instead of loops etc?
+<b>Every single day</b>, without a failure. I think `map` and `flatMap` are the first things you learn. I remember my very first Scala code, and by very first I literally mean first lines. I had this gorgeous for loop ready to go and someone pointed out in my code review that my 9 lines of code could be replaced with less than 10 characters... Of course, I was sold!
+
+### Real life scenarios
+You probably heard some scary stuff about category theory
 
 Real life scenarios:
 * map - on Option, will only execute if Some() - e.g
@@ -82,6 +83,9 @@ Examples: <br>
 * revert a string
 * is palindrome
 * https://www.geeksforgeeks.org/top-10-algorithms-in-interview-questions/ <- get like maybe 4 classic problems
+
+Note:
+Of course you can use for loops etc as you wish. Myself, I don't think I used a for loop once since I started my Scala journey - I want to make the most of Scala and i like how clean the code looks and how experssive you can get with using those transfornation functions. I like to be free from `x.length`'s, `i = 0`'s and `i++`'s - mutability!
 
 ----
 References:<br>
