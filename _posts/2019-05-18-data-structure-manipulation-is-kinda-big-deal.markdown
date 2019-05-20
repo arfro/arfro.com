@@ -1,11 +1,11 @@
 ---
 layout: post
 title: Data manipulation is kind of a big deal - part 1
-date: 2019-05-13 13:32:20
+date: 2019-05-18 13:32:20
 img: transformations/factory.png 
 tags: [transformation, map, flatMap, filter, collect, functional-programming]
 ---
-Data manipulation and transformation is a kind of a big deal. Now that I shared that recursion is important but also mentioned there is other ways to achieve certain goals let's look into that. This will be a first post in a mini series on data manipulation and transformation. I will focus on <b>collections</b> mainly - there is other important usages but I will focus on most intuitive stuff first.
+Data manipulation and transformation is a kind of a big deal. Now that I shared that recursion is important but also mentioned there is other ways to achieve certain goals let's look into that. This will be a first post in a mini series on data manipulation and transformation. I will focus on <b>collections</b> mainly for now - there is other important aspects to this topic but let's start with most intuitive stuff first.
 <br>
 
 Keeping that in mind let's recall Scala basic collections real quick:
@@ -21,7 +21,7 @@ I find there is usually a couple of basic things I want to do with collections (
 * do something with items that meet a certain condition
 * check if there is or isn't an item that meets a certain condition
 
-Let's start with `map`, `flatMap`, `collect` and `filter`.<br>
+Keeping that in mind let's start with `map`, `flatMap`, `collect` and `filter`.<br>
 
 ## map
 You can call `map` on all the collections. It applies a passed function to each element and returns a collection of transformed elements.<br>
@@ -46,7 +46,7 @@ List(10, 20, 30).map(_.toString) // List("5", "10", "15")
 {% endhighlight %}
 
 <b>Summary</b><br>
-You can think of `map` as "apply this function to each element of this collection". 
+You can think of `map` as "apply this function to each element of this collection and return the result". 
 
 <b>Important note - map for Option</b>
 
@@ -73,48 +73,52 @@ To make the end code more readable we could first we could create a little funct
 {% highlight scala %}
 def listOfStringUpCase(list: List[String]) = list.map(_.toUpperCase)
 {% endhighlight %}
-We can now `map`:
+So we could now `map`, right?
 {% highlight scala %}
 val upperCasedListsOfUsers = 
 allUsers.map(listOfStringUpCase) // List(List("ANN", "BETTY"), List("CARO", "CIARA"))
 {% endhighlight %}
-...and then `flatten`:
+...unfortunately that leaves us with a `List[List[String]]` again. So now it's time to `flatten` - to "merge" our nested `List`s and end up with a single `List`:
 {% highlight scala %}
 upperCasedListsOfUsers.flatten // List(ANN, BETTY, CARO, CIARA)
 {% endhighlight %}
-... instead of all this noise we could just use `flatMap`:
+
+
+But what about `flatmap`? Well, instead of all this noise we could just use `flatMap` instead for a very intuitive and elegant solution:
 {% highlight scala %}
 allUsers.flatMap(listOfStringUpCase) // List(ANN, BETTY, CARO, CIARA)
 {% endhighlight %}
 
 <b>Summary</b><br>
-You can think of `flatMap` as "apply this function to each element of this collection and then flatten the result".  
+You can think of `flatMap` as "apply this function to each element of this collection, then flatten the result and return transformed collection".  
 
 <b>Important note - flatMap for `List[Option[_]]`</b>
 
-`flatMap` has a special usage for a list of options - it will "remove" `None` values:
+`flatMap` has a special usage for a `List[Option]` - it will "remove" (flatten) `None` values:
 {% highlight scala %}
-List(Some("hello"), None, None, Some("world")).flatMap(x => None) // List()
+List(Some("hello"), None, None, Some("world")).flatMap(_.map(_.toUpperCase)) 
+// List(HELLO, WORLD)
 {% endhighlight %}
 ..unlike `map`:
 {% highlight scala %}
-List(Some("hello"), None, None, Some("world")).map(x => None) 
-// List(None, None, None, None)
+List(Some("hello"), None, None, Some("world")).map(_.map(_.toUpperCase)) 
+// List(Some(HELLO), None, None, Some(WORLD))
 {% endhighlight %}
 But in regards to above `map` - if we use `flatten` afterwards the result will be obviously the same as from above `flatMap`
 {% highlight scala %}
-List(Some("hello"), None, None, Some("world")).map(x => None).flatten // List()
+List(Some("hello"), None, None, Some("world")).map(_.map(_.toUpperCase)).flatten
+// List(HELLO, WORLD)
 {% endhighlight %}
 
 ## filter
-Returns items that meet a given predicate:
+This is quite trivial - `filter` does exactly what you think it does - it returns items that meet a given predicate:
 {% highlight scala %}
 List(1, 2, 3, 4).filter(_ > 3) // List(4)
 {% endhighlight %}
 
 
 ## collect
-Nothing more than a mix of `filter` and `map`. The syntax might seem a bit complicated as collect takes a partial function (post on that will come soon):
+A "mix" of `filter` and `map`. The syntax might seem a bit complicated as `collect` takes a partial function (post on partial functions will come soon):
 {% highlight scala %}
 List(1, 2, 3, 4).collect {
     case i if(i > 3) => i * 3
@@ -127,11 +131,10 @@ You can think of `collect` as "filter values from this collection and for those 
 
 
 
-
 ## Realistically, how often do you use those instead of loops etc?
-<b>Every single day</b>, without a failure. I think `map`, `flatMap` and `filter` are the first things you learn. I remember my very first Scala code, and by very first I literally mean first lines. I had this gorgeous for loop ready to go and someone pointed out in my code review that my 9 lines of code could be replaced with less than 10 characters... Of course, I was sold!
+<b>Every single day</b>, without a failure. I think `map`, `flatMap` and `filter` are the first things you learn. I remember my very first Scala code, and by very first I literally mean first lines. I had this gorgeous for-loop ready to go and someone pointed out in my code review that my 9 lines of code could be replaced with less than 10 characters... Of course, I was sold!
 
-Here is a few ideas on how to solve some easy problems using what I explained today:
+Here is a few ideas on how to solve some easy problems using what I explained today, compare them in your head to solutions that wouldn't use `map`, `flatmap`, `filter` or `collect`. Below solutions are much more compact, aren't they?
 
 ### list all odd numbers
 {% highlight scala %}
@@ -161,4 +164,4 @@ list.collect {
 
 
 ## Final note
-Of course you can use for loops and imperative ways if you wish for solving all of above problems too. I will never ever encourage this though. With incredibly powerful Collections API that Scala offers it would be like hooking up a snow plougher to a Ferrari. Myself, I don't think I used a for loop once since that first code review I mentioned - I want to make the most of Scala and I like how clean the code looks and how expressive you can get. So I am officially freed from `i = 0`s, `i > 0`'s and `i++`'s!
+Of course you can use for loops and imperative ways if you wish for solving all of above problems too. I will never ever encourage this though. With incredibly powerful Collections API that Scala offers it would be like hooking up a snow plougher to a Ferrari. Myself, I want to make the most of Scala and I like how clean the code looks and how expressive you can get. How satisfying to have those one liner solutions...
