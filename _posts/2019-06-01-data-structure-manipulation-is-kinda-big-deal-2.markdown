@@ -160,8 +160,8 @@ list.foldLeft(List[String]()){
 I can't stress enough how helpful it is to practice on little code tasks like on codewars.com or so to wrap one's head around `fold` and `reduce`. It's another way of thinking about problems - I can guarantee with time you will discover they are quite important concepts in functional programming.
 
 ____
-(*) in this case "" is String's identity value.
+(*) in this case "" is String's identity element for operation of concatenation.
 
-Identity value for type A is a value that when combined with another element of a type A will result in the same element. 
+When an identity element is paired with any element via the operation, it returns that element.
 
 In practise: for addition of integers identity is 0 because 1 + 0 = 1. For multiplication it's 1 because 4 * 1 = 4. It's probably a questionable choice to speak of identity for Strings, but it works for our simple example
