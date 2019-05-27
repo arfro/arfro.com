@@ -141,8 +141,9 @@ val eitherLeft: Either[String, Int] = Left("problem")
 eitherRight.fold(l => "left", r => r.toString) // "2"
 eitherLeft.fold(l => "left", r => r.toString) // "left"
 {% endhighlight %}
+Think about above fold as "if this Either is Left then evaluate first function I passed but if this Either is Right evaluate the second function I passed".
 
-Here is a few ideas on how to solve some easy problems using what I explained today, compare them in your head to solutions that wouldn't use `fold` or `reduce`.
+Here is also a few ideas on how to solve some easy problems using what I explained today, compare them in your head to solutions that wouldn't use `fold` or `reduce`.
 
 ### get maximum from a list of integers
 {% highlight scala %}
@@ -172,7 +173,7 @@ list.foldLeft(List[String]()){
 
 
 ## Final note
-I can't stress enough how helpful it is to practice on little code tasks like on codewars.com or so to wrap one's head around `fold` and `reduce`. It's another way of thinking about problems - I can guarantee with time you will discover they are quite important concepts in functional programming.
+I can't stress enough how helpful it is to practice on little code tasks like on codewars.com or so to wrap one's head around `fold` and `reduce`. It's another way of thinking about problems - I can guarantee with time you will discover they are quite important concepts in functional programming. That being said, sometimes you will notice you can replace your `fold` or `reduce` with a simpler looking pattern match - then it's completely up to you. Myself, if my `fold` or `reduce` look overly complicated I would probably try to improve readability by choosing a simpler looking solution. 
 
 ____
 (*) in this case "" is String's identity element for operation of concatenation.
