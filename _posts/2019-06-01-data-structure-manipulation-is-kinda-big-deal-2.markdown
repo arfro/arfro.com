@@ -70,7 +70,7 @@ list.fold("")(_.toString + _.toString) // "12345" (*)
 list.fold("0")(_.toString + _.toString) // "012345"
 {% endhighlight %}
 
-As for the second question about the "start value" - as you can see above, in collections if would be used to tell the compiler what type we expect. If we changed above to:
+As for the second question about the "start value" - as you can see above, in collections it would be used to tell the compiler what type we expect. If we changed above to:
 {% highlight scala %}
  val list = List(1, 2, 3, 4, 5)
 list.fold(0)(_.toString + _.toString) // start value is Int but elements in the function are String. Start value type dictates the return type
@@ -125,7 +125,22 @@ You can see the result is the same. Now take a moment to think about the differe
 
 
 ## Realistically, how often do you use those?
-<b>As much as you can</b>, it's a quick a painless way to calculate accumulations and it can be used to solve some well known problems in a smart and quick way.
+<b>As much as you can</b>, it's a quick a painless way to calculate accumulations and it can be used to solve some well known problems in a smart and quick way. Other than work on collections `fold` and `reduce` could be used as a form of error handling as it can replace pattern matching (more on error handling in a separate post):
+{% highlight scala %}
+Some(12).fold(0)(_ + 10) // 22
+None.fold(0)(_ + 10) // 0
+List().fold(0)(_ * _) // 0
+{% endhighlight %}
+In the examples above you can see that folding a `None` or an empty list results in the "start value" returned. 
+
+You could also use `fold` to transform `Either` regardless of whether it's `Left` or `Right`. The way `fold` is implemented on `Either` is a shortcut to pattern matching:
+{% highlight scala %}
+val eitherRight: Either[String, Int] = Right(2)
+val eitherLeft: Either[String, Int] = Left("problem")
+
+eitherRight.fold(l => "left", r => r.toString) // "2"
+eitherLeft.fold(l => "left", r => r.toString) // "left"
+{% endhighlight %}
 
 Here is a few ideas on how to solve some easy problems using what I explained today, compare them in your head to solutions that wouldn't use `fold` or `reduce`.
 
