@@ -1,13 +1,13 @@
 ---
 layout: post
-title: Functional error handling in Scala
-date: 2019-06-01 13:32:20
+title: Functional error handling in Scala - part 1
+date: 2019-07-05 13:32:20
 img: error-handling/error.png 
 tags: [error-handling, option, try, either, referential-transparency, pure-function, functional-programming]
 ---
 
 
-Let's talk about error handling. In functional programming we don't like side effects. We don't like cases we didn't think of before and errors are exactly that - things that can go wrong and that can result in side effects. How to handle errors in Scala in a functional way?
+Let's talk about error handling. In functional programming we don't like side effects. Errors are exactly that - things that can (and will!) go wrong. How to handle errors in Scala in a functional way?
 
 I mentioned in the very first post that when I think of Scala / functional programming I think _algebra_. What would your maths teacher have to say about you solving your equation like this:
 
@@ -27,7 +27,7 @@ x / y = null
 If functional ways are like algebrae, then we can't allow <b>null</b> values or <b>exceptions</b>. Null values break _referential transparency_ rule, or in other words, they break the purity of a function. Exception do that too (to some extent). Let's clarify.
 
 ### What's referential transparency and a pure function?
-<b>Pure function</b> is a function which:
+I mentioned it before but <b>pure function</b> is a function which:
 * its return value is not `Unit` - think about it: `Unit` strongly suggest we're on to something impure (like `println` perhaphs?)
 * has its return value depend ONLY on its arguments:
 {% highlight scala %}
@@ -48,14 +48,14 @@ add(1, 5) == 6 // true at all times as add(1, 5) is the same as 6 at all times
 <b>Referential transparency</b> refers to the last point - in simplification, it means that you can always replace a function call with its return value.
 
 ### No nulls sound sketchy
-If you ever debugged `NullPointerException` you will appreciate the no null rule. If not, think that null is not a value - it represents an absence of a value. And such thing doesn't exist in algebra. In the context of Scala I only came across using null in a context of working with some Java libraries that _could_ return a null. Still then, my Scala code would not use null (I will talk about this a bit more below).
+If you ever debugged `NullPointerException` you will appreciate the no null rule. If not, think that null is not a value - it represents an absence of a value. And such thing doesn't exist in algebra. Since the beginning of my functional programming journey I only came across using null in a context of working with some Java libraries that _could_ return a null. Still then, my Scala code would not use null.
 
 Scala does not have a notion of checked exceptions like Java, where the compiler reminds you (to a degree) of your error handling - so in Scala whatever you tell that your function will return, compiler assumes you aren't lying.
 
 ### Why exceptions break referential transparency "to some extent"?
-Exceptions should be used according to their name - exceptionally. When a situation is a true exception. Is division by zero a true exception? No. If your recursive function unexpectedly blows up the stack, is it a true exception? Probably yes. (but that also means - shame on your tests!)
+Exceptions should be used according to their name - exceptionally. When a situation is a true exception. Is division by zero a true exception? No. If your recursive function unexpectedly blows up the stack, is it a true exception? Probably yes. (although that also means shame on your tests!)
 
-That leads to (perhaps a controversial) statement that exceptions break referential transparency only if they're explicitly observed and acted upon. That means - if you write code that throws or catches exceptions explicitly, you break referential transparency. If the code does it "on its own" - I personally think it's fine. The exception will be thrown in a truly exceptional situation then.
+That leads to (perhaps a controversial) statement that exceptions break referential transparency only if they're explicitly observed and acted upon. That means - if you write code that throws or catches exceptions explicitly, you break referential transparency. If the code does it "on its own" - I personally think it's fine. The exception will be thrown in a truly exceptional situation then. That obviously doesn't mean we ignore error handling altogether! Let's see what Scala has to offer.
 
 
 ### Option and its usage in a real world
@@ -83,7 +83,7 @@ def optionalStrings(str: Option[String]) = ...
 * arguments that are not present on initialize
 {% highlight scala %}
 case class Customer(name: String, age: Option[Int]) 
-// age can be updated to Some later
+// age can be updated/added later
 {% endhighlight %}
 * when you don't care about the error message
 {% highlight scala %}
@@ -102,8 +102,8 @@ def divide(one: Int, two: Int): Option[Int] =
 
 Let's have a look at the birthday example from above implemented using `Either`.
 {% highlight scala %}
-// only a type alias to make below Either more explicit and easier to understand
-// This means nothing more than: type "Age" means type "Int"
+// type Age is only a type alias to make below Either more explicit and easier to understand
+// Aliasing here means nothing more than: type "Age" means type "Int"
 type Age = Int 
 // this will hold our error detail
 case class CalculationProblem(problem: String) 
@@ -164,7 +164,15 @@ As I mentioned a number of times in other posts already, it is all down to how m
 * I don't use nulls. Ever. I use `Option` if I don't care why something might be `None`, and `Either` if I want to be able to know the failure reason
 * I don't throw exceptions. I use `Either` instead.
 * I don't try/catch exceptions from code that could throw them (e.g. Java libraries) - instead I wrap the offending code in `Try` and pattern match on `Success` or `Failure` - that's where the exception stops bubbling up
-* I think of exceptions and nulls as evil - I do whatever it takes not to use them, even if that means seeking help from my senior colleagues on alternatives I might not be aware of.
+* I think of exceptions and nulls as evil - I do whatever it takes not to use them, even if that means seeking help from my senior colleagues on alternatives I might not (yet!) be aware of.
+
+
+_____
+### (Not so) scary stuff
+Remember how in the post on for comprehensions I said a monad is something that can be flatmapped over? I said:
+ >For comprehensions are great for working with and composing monads.
+ 
+ Guess what - `Try`, `Option` and `Either` (although Either from Scala 2.12 only!) are also monads. That means you can use them in for comprehensions.
  
 _____
 References:<br>
