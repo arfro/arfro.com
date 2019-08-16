@@ -16,7 +16,7 @@ When I first started my functional programming journey I heard a lot of "composi
 
 One liner polymorphism recap: things (objects, functions) can take many forms (if a function takes Animal type and a Cat is an Animal that means our function takes Cat* )
 
-I also mentioned functional programming is all about a clear division between <b>what</b> (data) and <b>how</b> (behaviour). 
+I also mentioned functional programming is all about a clear division between <b>what</b> (data) and <b>how</b> (behaviour/operations). 
 
 ### It's all maths, right?
                          
