@@ -64,18 +64,18 @@ Good. What if we want to have a zone of shops only?
 
 ### Type inference - playing guessing games with Scala compiler
 
-Scala compiler is awesome and it can do a lot of thinking for you. It's time to talk talk about <b>type inference</b>. But first, let's see what does "to infer" mean in real life:
-_to infer (verb): to conclude from evidence or by reasoning_
+On a note related to the above code let's talk about <b>type inference</b>. Scala compiler is awesome and it can do a lot of thinking for you. But first, let's see what "to infer" means in real life:
+> to infer (verb): to conclude from evidence or by reasoning
 
-Type inference is then Scala compiler "concludes the type from evidence", a.k.a. guessing which type you meant.
+Type inference is then when Scala compiler _"concludes the type from evidence"_, a.k.a. guessing which type you meant.
 
 
-Maybe you guessed already where this is going?
+Maybe you already figured out where this is going?
 {% highlight scala %}
   val shopZone = new Zone(new Pharmacy) 
 {% endhighlight %}
 
-Notice that in the above code we're not passing the type. We still need it though! In this situation Scala compiler will look at the above code and figure that since the class signature was `Zone[A](val anything: A)` and it you then pass an instance of type `Pharmacy` you then must mean that type A equals to `Pharmacy`.
+Remember that `Zone` class needs a type parameter? Notice that in the above code we're not passing the type. We still need it though! In this situation Scala compiler will look at the above code and figure that since the class signature was `Zone[A](val anything: A)` and you then pass an instance of type `Pharmacy` you then must mean that type A equals to `Pharmacy`.
 
 Please note that <b>type inference</b> is a general term that is not only to do with generics but also other objects (functions, values):
 {% highlight scala %}
@@ -85,11 +85,54 @@ def add(one: Int, two: Int) = one + two // function return type inferred to be I
 
 So to summarize, type inference happens anytime you let the Scala compiler figure the type out. As cool as it is, I try to avoid it and explicitly state my types, especially when nested code is involved. The code is much more readable and easier to reason about, let alone I'm less likely to see the infamous `Product with Serialable` type breaking my code (for which one of the reasons could be that you let the compiler overthink what you meant).
 
-### Scala type bounds
+### Upper and lower type bounds - cause everyone needs healthy boundaries!
+`Bounds` refer to boundaries you set for the type paramater of a class/method. If juice and coffee are liquids and potatos are solids, it could make sense to model a generic class `Glass[???]` to only take types that are `Liquids` (who would order a glass of potatoes?) You therefore set a <b>bound</b>(ary) for the type parameter of the class Glass and so end up with something like `Glass[Liquid]`. You might have heard of `upper type bounds` and `lower type bounds` - let's check them out then, they're not scary.
 
-#### Upper type bound
+#### Upper bound
+Upper bound is when a parameter type is "less or equal" to your type boundary. So in relation to the above example "upper" means that nothing of a "higher" type than `Liquid` can be passed as a parameter. Knowing this now the Scala syntax "less or equal to" `<:` will also make a lot of sense:
 
-#### Lower type bound
+{% highlight scala %}
+class Glass[T <: Liquid] // our type T has to be "less or equal" to Liquid
+interface Liquid
+interface Solid
+Juice extends Liquid
+Coffee extends Liquid
+Potato extends Solid
+
+new Glass[Juice] // ok!
+new Glass[Coffee] // ok!
+new Glass[Liquid] // ok!
+new Glass[Potato] // hmm.. why? nop! compile error
+{% endhighlight %}
+
+note if you know Java: `T <: Liquid` is basically `<T extends Liquid>`
+
+
+#### Lower bound
+
+
+#### Multiple type bound
+
+Bounded and unbounded parameters Scala bounds, upper type bound and lower type bound
+bounded type - there is bounds to a type, so maybe T that extends Car, we give bounds to type parameter we pass to the class/function. In java <T extends Car>
+
+when to use: glass only used for liquid. This is UPPER TYPE BOUND
+glass[T extends Liquid] in scala Glass[T <: Liquid] T is less than Liquid
+interface Liquid
+Juice extends Liquid
+Milk extends Liquid
+Cardbord
+
+Glass[Milk] OK
+Glass[Cardborad] NOK
+
+multiple bounded types: Glass[T extends Liquid & Fluid]
+for above it will need to be something thats a liquid and a fluid too
+
+unbounded type - just T 
+
+LOWER TYPE BOUND Glass[B >: A]
+
 
 ### Summary
 
@@ -97,13 +140,17 @@ Wow! What a chapter... Let's recap some of those big words:
 * generic class - a class that needs a type parameter
 * parametric polymorphism - basically... generic programming ("parametric" because types are passed as class/function parameters)
 * type inference - when Scala compiler guesses what type you meant
-* 
+* type bound - when your type is a bound e.g. T extends Juice 
+
+
 
 
 
                          
 ![function composition]({{site.baseurl}}/assets/img/functional-programming/category-theory-small.png)
 
+
+https://docs.scala-lang.org/tour/variances.html
 
 http://like-a-boss.net/2013/03/29/polymorphism-and-typeclasses-in-scala.html
 
