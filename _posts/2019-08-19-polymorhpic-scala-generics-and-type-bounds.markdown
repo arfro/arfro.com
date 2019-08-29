@@ -7,7 +7,7 @@ fig-caption: # Add figcaption (optional)
 tags: [functional-programming, polymorphism, generics, type-bounds]
 ---
 
-I want to start this blog post with admitting one thing I find very true: functional programming jargon can make it tough to understand even intuitive concepts. Today I will try my best to drill through the confusing world of generics, type bounds, parametric polymorphism, abstract types, generic types, type inference and all other things that sound... well... foreign at least. You will have to forgive me repeat myself a few times in this post. It's all for a greater good!
+I want to start this blog post with admitting one thing I find very true: functional programming mixed with generics jargon can make it tough to understand even intuitive concepts. Today I will try my best to drill through the confusing world of type bounds, parametric polymorphism, abstract types, generic types, type inference and all other things that sound... well... foreign at least. You will have to forgive me repeat myself a few times in this post. It's all for a greater good!
 
 ### In high overview... what are we even talking about?
 Polymorphism! Nothing more, nothing less. Let's recap what it stands for:
