@@ -1,4 +1,4 @@
-Please support this guy too, he helped me tremendously by publishing this lovely Jekyll theme! Would be totally lost without him :) 
+Please support artemsheludko too, he helped me tremendously by publishing this lovely Jekyll theme! Would be totally lost without him :) 
 
 ## Donate
 
