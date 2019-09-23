@@ -1,22 +1,4 @@
-# Flexible-Jekyll is a simple and clean theme for Jekyll
-
-![](https://github.com/artemsheludko/flexible-jekyll/blob/master/assets/img/promo-img.jpg?raw=true)
-
-## Features
-
-- [Google Fonts](https://fonts.google.com/)
-- [Font Awesome](http://fontawesome.io/)
-- [Disqus](https://disqus.com/)
-- [Analytics](https://analytics.google.com/analytics/web/)
-- Support Emoji
-
-## Installation:
-
-Fork the ``master`` branch and follow the [Jekyll Installation Documentation](https://jekyllrb.com/docs/installation/).
-
-## License
-
-GNU General Public License v3.0
+Please support this guy too, he helped me tremendously by publishing this lovely Jekyll theme! Would be totally lost in front-end without him :) 
 
 ## Donate
 
